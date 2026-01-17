@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { StackCarousel } from "@/components/stack-carousel";
 
 const services = [
   {
@@ -141,7 +141,13 @@ const coreStackWithTooling = [
   },
 ];
 
-const coreStackLoop = [...coreStackWithTooling, ...coreStackWithTooling];
+const stackCount = coreStackWithTooling.length;
+const stackHighlights = [
+  "Backend systems",
+  "API-first delivery",
+  "UI polish",
+  "Containerized deploys",
+];
 
 export default function Home() {
   return (
@@ -379,7 +385,7 @@ export default function Home() {
         </section>
 
         <section className="mx-auto w-full max-w-6xl px-6 py-16">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="space-y-8">
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
                 Tech stack
@@ -392,47 +398,39 @@ export default function Home() {
                 where they serve the product.
               </p>
             </div>
-            <div className="grid gap-4">
-              <Card className="border-black/10 bg-white/80 shadow-sm backdrop-blur">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">Core stack</CardTitle>
-                  <CardDescription>
-                    Languages, frameworks, and frontend tooling.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="logo-marquee">
-                  <div
-                    className="logo-track"
-                    style={{ animationDuration: "32s" }}
-                  >
-                    {coreStackLoop.map((item, index) => (
-                      <div
-                        key={`${item.name}-${index}`}
-                        className="logo-item"
-                      >
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
-                          <Image
-                            src={item.logo}
-                            alt={`${item.name} logo`}
-                            width={28}
-                            height={28}
-                            className="h-7 w-7"
-                          />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-[color:var(--ink)]">
-                            {item.name}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {item.detail}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+            <Card className="relative overflow-hidden border-black/10 bg-white/80 shadow-lg backdrop-blur">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.18),transparent_55%),radial-gradient(circle_at_bottom,_rgba(234,179,8,0.16),transparent_50%)]" />
+              <CardHeader className="relative pb-2">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <CardTitle className="text-2xl text-[color:var(--ink)] sm:text-3xl">
+                      Core stack gallery
+                    </CardTitle>
+                    <CardDescription>
+                      Backend-first tools with polished frontend delivery.
+                    </CardDescription>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="secondary">{stackCount} technologies</Badge>
+                    <Badge variant="outline">Production-ready</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="relative space-y-6">
+                <StackCarousel items={coreStackWithTooling} />
+                <div className="flex flex-wrap gap-2">
+                  {stackHighlights.map((item) => (
+                    <Badge
+                      key={item}
+                      variant="secondary"
+                      className="bg-white/70 text-muted-foreground shadow-sm"
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
