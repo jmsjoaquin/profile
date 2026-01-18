@@ -1,3 +1,11 @@
+import {
+  ArrowUpRight,
+  Code2,
+  Database,
+  Link2,
+  Palette,
+} from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,27 +15,51 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { StackCarousel } from "@/components/stack-carousel";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { HeroHighlight } from "@/components/ui/hero-highlight";
+import { Spotlight } from "@/components/ui/spotlight";
+import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { FloatingNav } from "@/components/ui/floating-navbar";
+import { ExpandableCards } from "@/components/ui/expandable-cards";
+import { NoiseBackground } from "@/components/ui/noise-background";
 
 const services = [
   {
     title: "Backend architecture",
     description:
-      "Designing resilient APIs, data models, and services that stay fast under real traffic.",
-    points: ["API-first design", "Data modeling", "Reliability patterns"],
+      "API-first systems, clean data modeling, and reliability patterns built to scale.",
+    icon: Database,
+    accent: "rgba(14, 116, 144, 0.45)",
+    spotlight: "rgba(14, 116, 144, 0.25)",
+    points: ["API design", "Data modeling", "Reliability patterns"],
   },
   {
     title: "Systems integration",
     description:
-      "Connecting payments, auth, and third-party services with clean, secure workflows.",
-    points: ["3rd-party integrations", "Auth + security", "Event pipelines"],
+      "Payments, auth, and third-party services wired together with secure workflows.",
+    icon: Link2,
+    accent: "rgba(234, 179, 8, 0.45)",
+    spotlight: "rgba(234, 179, 8, 0.22)",
+    points: ["Secure workflows", "Event pipelines", "3rd-party APIs"],
   },
   {
     title: "Product engineering",
     description:
-      "Shipping full stack features with crisp UI and robust infrastructure behind it.",
-    points: ["MVP to scale", "Observability", "Performance tuning"],
+      "Shipping full stack features with a polished UX and resilient infrastructure.",
+    icon: Code2,
+    accent: "rgba(34, 197, 94, 0.45)",
+    spotlight: "rgba(34, 197, 94, 0.22)",
+    points: ["MVP to scale", "Performance tuning", "Observability"],
+  },
+  {
+    title: "Frontend development",
+    description:
+      "Modern UI design and implementation using CSS, Tailwind, and Material UI.",
+    icon: Palette,
+    accent: "rgba(59, 130, 246, 0.45)",
+    spotlight: "rgba(59, 130, 246, 0.22)",
+    points: ["Design systems", "Component libraries", "Responsive UI"],
   },
 ];
 
@@ -35,21 +67,19 @@ const projects = [
   {
     title: "Ledgerline",
     description:
-      "A fintech operations layer for automated reconciliation and reporting.",
+      "Fintech operations layer for automated reconciliation and reporting.",
     tags: ["Python", "Postgres", "Kafka"],
-    outcome: "Designed a backend core with clear audit trails and low latency.",
+    outcome: "Designed backend core with audit trails and low latency.",
   },
   {
     title: "Clinic Atlas",
-    description:
-      "Patient scheduling and workflow orchestration for multi-site clinics.",
+    description: "Scheduling and workflow orchestration for multi-site clinics.",
     tags: ["Java", "REST APIs", "Redis"],
-    outcome: "Unified intake, scheduling, and analytics into a single system.",
+    outcome: "Unified intake, scheduling, and analytics into one system.",
   },
   {
     title: "Signalroom",
-    description:
-      "Customer intelligence dashboard for support and success teams.",
+    description: "Customer intelligence dashboard for support teams.",
     tags: ["PHP", "MySQL", "Webhooks"],
     outcome: "Streamlined cross-tool data sync with actionable reporting.",
   },
@@ -58,260 +88,280 @@ const projects = [
 const process = [
   {
     step: "Discovery",
-    detail: "Short alignment sprint to define outcomes, risks, and scope.",
+    detail:
+      "Deep-dive on goals, constraints, and success metrics. I map risks early, clarify scope, and turn requirements into a focused delivery plan.",
   },
   {
     step: "Design",
-    detail: "System diagrams, API contracts, and data models before code.",
+    detail:
+      "Define API contracts, data models, and system boundaries with clear ownership. I create architecture notes and flow diagrams to keep everyone aligned.",
   },
   {
     step: "Build",
-    detail: "Iterative delivery with testable milestones and clear docs.",
+    detail:
+      "Ship in tight iterations with tests, docs, and reliable CI. I prioritize performance, observability, and maintainable code that scales.",
   },
   {
     step: "Launch",
-    detail: "Deployment, observability, and post-launch optimizations.",
+    detail:
+      "Production-ready releases with monitoring, alerts, and rollback plans. I stay through stabilization, then hand off with clean docs and training.",
   },
 ];
 
-const coreStack = [
+const stackItems = [
   {
     name: "Python",
+    area: "Backend",
+    icon: "simple-icons:python",
+    color: "3776AB",
     logo: "/logos/python.svg",
-    detail: "APIs + automation",
   },
   {
     name: "Java",
-    logo: "/logos/java.svg",
-    detail: "Enterprise services",
+    area: "Backend",
+    icon: "simple-icons:openjdk",
+    color: "007396",
+    logo: "/logos/newjavalogo.png",
   },
   {
     name: "PHP",
+    area: "Backend",
+    icon: "simple-icons:php",
+    color: "777BB4",
     logo: "/logos/php.svg",
-    detail: "Web platforms",
   },
   {
     name: "Next.js",
+    area: "Frontend",
+    icon: "simple-icons:nextdotjs",
+    color: "ffffff",
     logo: "/logos/nextjs.svg",
-    detail: "Full stack UI",
   },
   {
-    name: "CSS",
+    name: "CSS3",
+    area: "Frontend",
+    icon: "simple-icons:css3",
+    color: "1572B6",
     logo: "/logos/css.svg",
-    detail: "Design systems",
   },
   {
     name: "Tailwind CSS",
+    area: "Frontend",
+    icon: "simple-icons:tailwindcss",
+    color: "06B6D4",
     logo: "/logos/tailwindcss.svg",
-    detail: "Utility styling",
   },
   {
     name: "Material UI",
+    area: "Frontend",
+    icon: "simple-icons:mui",
+    color: "007FFF",
     logo: "/logos/mui.svg",
-    detail: "Component library",
   },
   {
     name: "Docker",
+    area: "Infra",
+    icon: "simple-icons:docker",
+    color: "2496ED",
     logo: "/logos/docker.svg",
-    detail: "Containerized deploys",
   },
   {
     name: "FastAPI",
+    area: "Backend",
+    icon: "simple-icons:fastapi",
+    color: "009688",
     logo: "/logos/fastapi.svg",
-    detail: "Async APIs",
   },
   {
     name: "Django",
+    area: "Backend",
+    icon: "simple-icons:django",
+    color: "44B78B",
     logo: "/logos/django.svg",
-    detail: "Robust backends",
   },
-];
-
-const coreStackWithTooling = [
-  ...coreStack,
   {
     name: "Swagger UI",
+    area: "Tooling",
+    icon: "simple-icons:swagger",
+    color: "85EA2D",
     logo: "/logos/swagger.svg",
-    detail: "API documentation",
   },
   {
     name: "Postman",
+    area: "Tooling",
+    icon: "simple-icons:postman",
+    color: "FF6C37",
     logo: "/logos/postman.svg",
-    detail: "API testing",
   },
 ];
 
-const stackCount = coreStackWithTooling.length;
-const stackHighlights = [
-  "Backend systems",
-  "API-first delivery",
-  "UI polish",
-  "Containerized deploys",
+const toRgba = (hex: string, alpha = 0.22) => {
+  const normalized = hex.replace("#", "").trim();
+  if (normalized.length !== 6) {
+    return `rgba(255, 255, 255, ${alpha})`;
+  }
+  const value = Number.parseInt(normalized, 16);
+  if (Number.isNaN(value)) {
+    return `rgba(255, 255, 255, ${alpha})`;
+  }
+  const r = (value >> 16) & 255;
+  const g = (value >> 8) & 255;
+  const b = value & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+const heroStats = [
+  {
+    label: "Backend",
+    value: "APIs, data, and reliability",
+    detail: "Fault-tolerant services, clean models, and observability.",
+  },
+  {
+    label: "Frontend",
+    value: "Design systems and UI delivery",
+    detail: "Responsive components, accessible UX, and polish.",
+  },
+  {
+    label: "Delivery",
+    value: "Documented, testable milestones",
+    detail: "Clear cadence, async updates, and smooth handoff.",
+  },
 ];
+
+const navItems = [
+  { name: "Services", link: "#services" },
+  { name: "Work", link: "#work" },
+  { name: "Stack", link: "#stack" },
+  { name: "Contact", link: "#contact" },
+];
+
+const noiseButtonClass =
+  "h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 text-sm text-black shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]";
+
+const noiseButtonProps = {
+  containerClassName: "w-fit rounded-full p-2",
+  gradientColors: [
+    "rgb(255, 100, 150)",
+    "rgb(100, 150, 255)",
+    "rgb(255, 200, 100)",
+  ],
+};
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-[-180px] h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.35),transparent_70%)] blur-3xl" />
-        <div className="absolute right-[-140px] top-[10%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_top,_rgba(234,179,8,0.35),transparent_70%)] blur-3xl" />
-        <div className="absolute left-[-160px] top-[45%] h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle_at_top,_rgba(20,83,45,0.28),transparent_70%)] blur-3xl" />
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <Spotlight
+          className="left-[-140px] top-[5%] h-[420px] w-[420px]"
+          fill="rgba(14,116,144,0.6)"
+        />
+        <Spotlight
+          className="right-[-160px] top-[15%] h-[420px] w-[420px]"
+          fill="rgba(234,179,8,0.5)"
+        />
       </div>
 
-      <header className="relative z-10 border-b border-black/5">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-          <div className="flex items-center gap-3">
-            {/* <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[conic-gradient(from_180deg_at_50%_50%,rgba(14,116,144,0.9),rgba(234,179,8,0.85),rgba(14,116,144,0.9))] text-xs font-semibold text-white">
+      <FloatingNav
+        navItems={navItems}
+        leftSlot={
+          <div className="flex items-center gap-3 pl-1 text-xs uppercase tracking-[0.35em] text-foreground">
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-cyan-500/25 via-transparent to-amber-500/20 text-[10px] font-semibold">
               JM
-            </div> */}
-            <div className="text-xs uppercase tracking-[0.35em] text-[color:var(--ink)]">
-              James
-            </div>
+              <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/10" />
+            </span>
+            <span className="hidden sm:inline">James</span>
           </div>
-
-          <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-            <a className="hover:text-foreground" href="#services">
-              Services
-            </a>
-            <a className="hover:text-foreground" href="#work">
-              Work
-            </a>
-            <a className="hover:text-foreground" href="#process">
-              Process
-            </a>
-            <a className="hover:text-foreground" href="#contact">
-              Contact
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <Badge variant="outline" className="hidden md:inline-flex">
-              Available for new builds
-            </Badge>
-            <Button asChild size="sm" className="rounded-full px-5">
+        }
+        rightSlot={
+          <div className="flex items-center gap-2 pr-1">
+            <ThemeToggle />
+            <Button
+              asChild
+              size="sm"
+              className="rounded-full border border-border/70 bg-white/10 px-4 text-xs uppercase tracking-[0.3em] text-foreground hover:bg-white/20"
+            >
               <a href="#contact">Book a call</a>
             </Button>
           </div>
-        </div>
-      </header>
+        }
+      />
 
-      <main className="relative z-10">
+      <div className="relative z-10">
         <section className="mx-auto w-full max-w-6xl px-6 pb-20 pt-16">
-          <div className="grid items-start gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="space-y-8">
-              <Badge className="w-fit bg-white/70 text-[color:var(--ink)] shadow-sm backdrop-blur">
-                Backend-first full stack developer
-              </Badge>
-              <div className="space-y-5">
-                <h1 className="text-4xl font-semibold leading-[1.05] text-[color:var(--ink)] sm:text-5xl lg:text-6xl">
-                  Reliable backends with a clean, product-ready finish.
-                </h1>
-                <p className="max-w-xl text-lg text-muted-foreground">
-                  I build scalable services and crisp interfaces. Core strengths
-                  in Python, Java, PHP, and Next.js, with confident CSS,
-                  Tailwind CSS, and Material UI delivery.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <Button asChild size="lg" className="rounded-full px-6">
-                  <a href="#contact">Start a project</a>
-                </Button>
-                <Button
-                  asChild
+          <HeroHighlight
+            containerClassName="h-auto min-h-[34rem] bg-transparent py-16"
+            className="mx-auto w-full max-w-6xl"
+          >
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-6">
+                <Badge
                   variant="outline"
-                  size="lg"
-                  className="rounded-full px-6"
+                  className="w-fit border-white/10 bg-transparent text-[11px] uppercase tracking-[0.3em] text-muted-foreground"
                 >
-                  <a href="#work">View selected work</a>
-                </Button>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-3">
-                <Card className="border-black/10 bg-white/70 shadow-sm backdrop-blur">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base">Backend depth</CardTitle>
-                    <CardDescription>
-                      Architecture, data, and performance.
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-                <Card className="border-black/10 bg-white/70 shadow-sm backdrop-blur">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base">Clean delivery</CardTitle>
-                    <CardDescription>
-                      Documented, tested, and maintainable.
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-                <Card className="border-black/10 bg-white/70 shadow-sm backdrop-blur">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base">Product focus</CardTitle>
-                    <CardDescription>
-                      Fast iterations without fragile shortcuts.
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              </div>
-            </div>
-
-            <Card className="relative overflow-hidden border-black/10 bg-white/80 shadow-lg backdrop-blur">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(14,116,144,0.12),transparent_55%)]" />
-              <CardHeader className="relative space-y-4">
-                <div className="flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                  <span className="h-2 w-2 rounded-full bg-[color:var(--brand)]" />
-                  Focus
-                  <span className="h-px flex-1 bg-black/10" />
-                </div>
-                <CardTitle className="text-xl">
-                  Building systems that scale with confidence.
-                </CardTitle>
-                <CardDescription>
-                  Focused delivery with calm, predictable milestones.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="relative space-y-6">
-                <div className="rounded-2xl border border-black/10 bg-white/80 p-4">
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    Focus areas
+                  Backend-first full stack developer
+                </Badge>
+                <div className="space-y-5">
+                  <h1 className="text-4xl font-semibold leading-[1.05] text-foreground sm:text-5xl lg:text-6xl">
+                    <TextGenerateEffect
+                      words="Reliable systems with a product-ready finish."
+                      className="text-foreground"
+                    />
+                  </h1>
+                  <p className="max-w-xl text-lg text-muted-foreground">
+                    I build scalable services and crisp interfaces. Core
+                    strengths in Python, Java, PHP, and Next.js, with confident
+                    CSS, Tailwind CSS, and Material UI delivery.
                   </p>
-                  <div className="mt-3 grid gap-2">
-                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
-                      <span className="text-sm text-[color:var(--ink)]">
-                        API design
+                </div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <NoiseBackground {...noiseButtonProps}>
+                    <a href="#contact" className={noiseButtonClass}>
+                      Start a project &rarr;
+                    </a>
+                  </NoiseBackground>
+                  <Button
+                    asChild
+                    variant="ghost"
+                    size="lg"
+                    className="rounded-full"
+                  >
+                    <a href="#work" className="flex items-center gap-2">
+                      View selected work
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="grid gap-3">
+                {heroStats.map((item, index) => (
+                  <div
+                    key={item.label}
+                    className="group relative overflow-hidden rounded-2xl border border-border/50 bg-transparent px-5 py-3 transition hover:-translate-y-1"
+                  >
+                    <span className="pointer-events-none absolute inset-y-0 left-0 w-px bg-gradient-to-b from-cyan-400/60 via-emerald-400/30 to-transparent opacity-0 transition group-hover:opacity-100" />
+                    <span className="pointer-events-none absolute bottom-0 left-6 h-px w-16 bg-gradient-to-r from-cyan-400/70 to-transparent opacity-60" />
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-2">
+                        <p className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+                          {item.label}
+                        </p>
+                        <p className="text-base font-medium leading-snug text-foreground">
+                          {item.value}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {item.detail}
+                        </p>
+                      </div>
+                      <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground/60">
+                        {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
-                    </div>
-                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
-                      <span className="text-sm text-[color:var(--ink)]">
-                        Scalable data
-                      </span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-2)]" />
-                    </div>
-                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
-                      <span className="text-sm text-[color:var(--ink)]">
-                        Cloud deploys
-                      </span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
-                    </div>
-                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
-                      <span className="text-sm text-[color:var(--ink)]">
-                        Dashboards
-                      </span>
-                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-2)]" />
                     </div>
                   </div>
-                </div>
-
-                <Separator />
-
-                <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-sm text-muted-foreground">
-                  <span className="font-medium text-[color:var(--ink)]">
-                    Based in GMT+3
-                  </span>
-                  <span>Working async with global teams.</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                ))}
+              </div>
+            </div>
+          </HeroHighlight>
         </section>
 
         <section id="services" className="mx-auto w-full max-w-6xl px-6 py-16">
@@ -319,70 +369,101 @@ export default function Home() {
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
               Services
             </p>
-            <div className="flex flex-col gap-3">
-              <h2 className="max-w-2xl text-3xl font-semibold text-[color:var(--ink)] sm:text-4xl">
-                Backend strength with full stack range.
-              </h2>
-              <p className="max-w-2xl text-muted-foreground">
-                I partner with teams who want robust infrastructure and
-                thoughtful UX delivered with clarity.
-              </p>
-            </div>
+            <h2 className="max-w-2xl text-3xl font-semibold text-foreground sm:text-4xl">
+              Backend strength with full stack range.
+            </h2>
+            <p className="max-w-2xl text-muted-foreground">
+              I partner with teams who want robust infrastructure and thoughtful
+              UX delivered with clarity.
+            </p>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {services.map((service) => (
-              <Card
-                key={service.title}
-                className="border-black/10 bg-white/70 shadow-sm backdrop-blur"
-              >
-                <CardHeader>
-                  <CardTitle>{service.title}</CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {service.points.map((point) => (
-                      <li key={point} className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:gap-8">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <CardSpotlight
+                  key={service.title}
+                  className="group relative overflow-hidden border-border/60 bg-card/70 p-6 shadow-[0_0_30px_rgba(0,0,0,0.2)] transition hover:-translate-y-1 hover:border-border hover:bg-card/90"
+                  color={service.spotlight}
+                >
+                  <span
+                    className="pointer-events-none absolute right-6 top-6 h-20 w-20 rounded-full opacity-40 blur-2xl"
+                    style={{
+                      background: `radial-gradient(circle, ${service.accent} 0%, transparent 70%)`,
+                    }}
+                  />
+                  <CardHeader className="relative z-10 p-0">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-foreground transition group-hover:scale-[1.05]"
+                          style={{
+                            background: `linear-gradient(135deg, ${service.accent} 0%, rgba(255,255,255,0.06) 70%)`,
+                          }}
+                        >
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                            Service
+                          </p>
+                          <CardTitle className="text-lg text-foreground">
+                            {service.title}
+                          </CardTitle>
+                        </div>
+                      </div>
+                      <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground/60">
+                        Core
+                      </span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="relative z-10 space-y-4 px-0 pb-0 pt-4">
+                    <CardDescription className="text-sm text-muted-foreground">
+                      {service.description}
+                    </CardDescription>
+                    <div className="flex flex-wrap gap-2">
+                      {service.points.map((point) => (
+                        <Badge
+                          key={point}
+                          variant="outline"
+                          className="border-border/60 bg-background/40 text-[11px] font-medium text-muted-foreground"
+                        >
+                          {point}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </CardSpotlight>
+              );
+            })}
           </div>
         </section>
 
         <section id="work" className="mx-auto w-full max-w-6xl px-6 py-16">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
-                Selected work
-              </p>
-              <h2 className="mt-4 text-3xl font-semibold text-[color:var(--ink)] sm:text-4xl">
-                Systems that stay reliable as teams grow.
-              </h2>
-            </div>
-            {/* <Badge
-              variant="outline"
-              className="hidden items-center gap-2 border-black/10 bg-white/70 text-[10px] uppercase tracking-[0.3em] text-muted-foreground shadow-sm backdrop-blur md:inline-flex"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
-              Case studies by request
-            </Badge> */}
+          <div className="flex flex-col gap-3">
+            <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
+              Selected work
+            </p>
+            <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+              Systems that stay reliable as teams grow.
+            </h2>
           </div>
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {projects.map((project) => (
               <Card
                 key={project.title}
-                className="flex h-full flex-col border-black/10 bg-white/75 shadow-sm backdrop-blur"
+                className="group relative overflow-hidden border-border/60 bg-card/70 transition hover:-translate-y-1 hover:border-border"
               >
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-cyan-500/20 blur-2xl" />
+                </div>
                 <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
+                  <CardTitle className="text-lg text-foreground">
+                    {project.title}
+                  </CardTitle>
                   <CardDescription>{project.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="mt-auto space-y-4">
+                <CardContent className="space-y-4">
                   <p className="text-sm text-muted-foreground">
                     {project.outcome}
                   </p>
@@ -399,53 +480,55 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-6xl px-6 py-16">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
-                Tech stack
-              </p>
-              <h2 className="text-3xl font-semibold text-[color:var(--ink)] sm:text-4xl">
-                Backend-heavy, product-ready.
-              </h2>
-              <p className="text-muted-foreground">
-                I build with battle-tested stacks and add modern frontend layers
-                where they serve the product.
-              </p>
+        <section id="stack" className="mx-auto w-full max-w-6xl px-6 py-16">
+          <div className="flex flex-col gap-4">
+            <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
+              Tech stack
+            </p>
+            <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+              Backend-heavy, product-ready.
+            </h2>
+            <p className="max-w-2xl text-muted-foreground">
+              Battle-tested tools for data, APIs, and modern UI delivery.
+            </p>
+          </div>
+          <div className="mt-10">
+            <div className="group/stack grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {stackItems.map((item) => {
+                const spotlight = toRgba(item.color, 0.22);
+                return (
+                  <CardSpotlight
+                    key={item.name}
+                    color={spotlight}
+                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-background/40 p-4 transition hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] group-hover/stack:opacity-60 hover:opacity-100"
+                  >
+                    <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+                    <div className="relative z-10 flex items-center justify-between">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                        <img
+                          src={
+                            item.logo ??
+                            `https://api.iconify.design/${item.icon}.svg?color=%23${item.color}`
+                          }
+                          alt={`${item.name} logo`}
+                          className="h-5 w-5"
+                          loading="lazy"
+                        />
+                      </div>
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                        {item.area}
+                      </span>
+                    </div>
+                    <p className="relative z-10 mt-4 text-base font-medium text-foreground">
+                      {item.name}
+                    </p>
+                    <p className="relative z-10 text-xs text-muted-foreground">
+                      Focus-ready delivery
+                    </p>
+                  </CardSpotlight>
+                );
+              })}
             </div>
-            <Card className="relative overflow-hidden border-black/10 bg-white/80 shadow-lg backdrop-blur">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.18),transparent_55%),radial-gradient(circle_at_bottom,_rgba(234,179,8,0.16),transparent_50%)]" />
-              <CardHeader className="relative pb-2">
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <CardTitle className="text-2xl text-[color:var(--ink)] sm:text-3xl">
-                      Core stack gallery
-                    </CardTitle>
-                    <CardDescription>
-                      Backend-first tools with polished frontend delivery.
-                    </CardDescription>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">{stackCount} technologies</Badge>
-                    <Badge variant="outline">Production-ready</Badge>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="relative space-y-6">
-                <StackCarousel items={coreStackWithTooling} />
-                <div className="flex flex-wrap gap-2">
-                  {stackHighlights.map((item) => (
-                    <Badge
-                      key={item}
-                      variant="secondary"
-                      className="bg-white/70 text-muted-foreground shadow-sm"
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </section>
 
@@ -454,27 +537,12 @@ export default function Home() {
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
               Process
             </p>
-            <h2 className="text-3xl font-semibold text-[color:var(--ink)] sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
               Clear steps, no surprises.
             </h2>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {process.map((item, index) => (
-              <Card
-                key={item.step}
-                className="border-black/10 bg-white/75 shadow-sm backdrop-blur"
-              >
-                <CardHeader>
-                  <p className="text-sm text-muted-foreground">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <CardTitle>{item.step}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  {item.detail}
-                </CardContent>
-              </Card>
-            ))}
+          <div className="mt-10">
+            <ExpandableCards items={process} />
           </div>
         </section>
 
@@ -482,13 +550,14 @@ export default function Home() {
           id="contact"
           className="mx-auto w-full max-w-6xl px-6 pb-20 pt-10"
         >
-          <Card className="border-black/10 bg-[linear-gradient(120deg,rgba(255,255,255,0.95),rgba(255,255,255,0.75))] shadow-lg backdrop-blur">
-            <CardContent className="flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between">
+          <Card className="relative overflow-hidden border-border/60 bg-card/70">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.2),transparent_60%)]" />
+            <CardContent className="relative flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between">
               <div className="space-y-3">
                 <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
                   Let us build
                 </p>
-                <h2 className="text-3xl font-semibold text-[color:var(--ink)]">
+                <h2 className="text-3xl font-semibold text-foreground">
                   Ready for a backend that stays calm under pressure?
                 </h2>
                 <p className="max-w-xl text-muted-foreground">
@@ -497,14 +566,16 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="rounded-full px-6">
-                  <a href="mailto:hello@yourdomain.com">Email me</a>
-                </Button>
+                <NoiseBackground {...noiseButtonProps}>
+                  <a href="mailto:hello@yourdomain.com" className={noiseButtonClass}>
+                    Email me &rarr;
+                  </a>
+                </NoiseBackground>
                 <Button
                   asChild
                   variant="outline"
                   size="lg"
-                  className="rounded-full px-6"
+                  className="rounded-full"
                 >
                   <a href="#services">See services</a>
                 </Button>
@@ -512,9 +583,9 @@ export default function Home() {
             </CardContent>
           </Card>
         </section>
-      </main>
+      </div>
 
-      <footer className="relative z-10 border-t border-black/5">
+      <footer className="border-t border-white/10">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row md:items-center">
           <p>James. Backend-focused full stack developer.</p>
           <div className="flex items-center gap-6">

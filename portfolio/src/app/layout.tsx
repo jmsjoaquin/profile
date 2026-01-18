@@ -5,6 +5,8 @@ import {
   Space_Grotesk,
 } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Spotlight } from "@/components/ui/spotlight";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -37,11 +39,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${instrumentSerif.variable} ${jetBrainsMono.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+            <div className="pointer-events-none absolute inset-0">
+              <Spotlight
+                className="left-[-160px] top-[5%] h-[420px] w-[420px]"
+                fill="rgba(14,116,144,0.55)"
+              />
+              <Spotlight
+                className="right-[-200px] top-[12%] h-[420px] w-[420px]"
+                fill="rgba(234,179,8,0.45)"
+              />
+            </div>
+            <div className="relative z-10">{children}</div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
