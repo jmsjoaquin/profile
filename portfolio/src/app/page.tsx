@@ -65,23 +65,24 @@ const services = [
 
 const projects = [
   {
-    title: "Ledgerline",
+    title: "Investment Management System",
     description:
-      "Fintech operations layer for automated reconciliation and reporting.",
-    tags: ["Python", "Postgres", "Kafka"],
-    outcome: "Designed backend core with audit trails and low latency.",
+      "Portfolio tracking, compliance workflows, and reporting dashboards.",
+    tags: ["Python", "Django", "Docker"],
+    outcome: "Built secure data pipelines with audit-ready reporting.",
   },
   {
-    title: "Clinic Atlas",
-    description: "Scheduling and workflow orchestration for multi-site clinics.",
-    tags: ["Java", "REST APIs", "Redis"],
-    outcome: "Unified intake, scheduling, and analytics into one system.",
+    title: "Rent Calculator Approval System",
+    description:
+      "Approval flows with role-based checks and automated calculations.",
+    tags: ["Next.js", "FastAPI", "Docker"],
+    outcome: "Reduced approval time with reliable backend services.",
   },
   {
-    title: "Signalroom",
-    description: "Customer intelligence dashboard for support teams.",
-    tags: ["PHP", "MySQL", "Webhooks"],
-    outcome: "Streamlined cross-tool data sync with actionable reporting.",
+    title: "Admin RBAC Dashboard System",
+    description: "Admin tools with RBAC, audits, and clean UI workflows.",
+    tags: ["Next.js", "Tailwind CSS", "Material UI"],
+    outcome: "Delivered a fast, intuitive admin experience.",
   },
 ];
 
@@ -166,6 +167,18 @@ const stackItems = [
     logo: "/logos/docker.svg",
   },
   {
+    name: "SQL",
+    area: "Backend",
+    icon: "simple-icons:mysql",
+    color: "4479A1",
+  },
+  {
+    name: "AWS",
+    area: "Cloud",
+    icon: "simple-icons:amazonaws",
+    color: "FF9900",
+  },
+  {
     name: "FastAPI",
     area: "Backend",
     icon: "simple-icons:fastapi",
@@ -178,20 +191,6 @@ const stackItems = [
     icon: "simple-icons:django",
     color: "44B78B",
     logo: "/logos/django.svg",
-  },
-  {
-    name: "Swagger UI",
-    area: "Tooling",
-    icon: "simple-icons:swagger",
-    color: "85EA2D",
-    logo: "/logos/swagger.svg",
-  },
-  {
-    name: "Postman",
-    area: "Tooling",
-    icon: "simple-icons:postman",
-    color: "FF6C37",
-    logo: "/logos/postman.svg",
   },
 ];
 
@@ -265,8 +264,12 @@ export default function Home() {
         navItems={navItems}
         leftSlot={
           <div className="flex items-center gap-3 pl-1 text-xs uppercase tracking-[0.35em] text-foreground">
-            <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-cyan-500/25 via-transparent to-amber-500/20 text-[10px] font-semibold">
-              JM
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5">
+              <img
+                src="/jm1.png"
+                alt="James"
+                className="h-full w-full rounded-full object-cover"
+              />
               <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/10" />
             </span>
             <span className="hidden sm:inline">James</span>
@@ -519,11 +522,8 @@ export default function Home() {
                         {item.area}
                       </span>
                     </div>
-                    <p className="relative z-10 mt-4 text-base font-medium text-foreground">
+                    <p className="relative z-10 mt-4 text-lg font-semibold text-foreground">
                       {item.name}
-                    </p>
-                    <p className="relative z-10 text-xs text-muted-foreground">
-                      Focus-ready delivery
                     </p>
                   </CardSpotlight>
                 );
@@ -585,20 +585,7 @@ export default function Home() {
         </section>
       </div>
 
-      <footer className="border-t border-white/10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row md:items-center">
-          <p>James. Backend-focused full stack developer.</p>
-          <div className="flex items-center gap-6">
-            <a className="hover:text-foreground" href="mailto:hello@yourdomain.com">
-              hello@yourdomain.com
-            </a>
-            <span className="hidden md:inline">/</span>
-            <a className="hover:text-foreground" href="#work">
-              Selected work
-            </a>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   );
 }
