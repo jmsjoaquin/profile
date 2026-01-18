@@ -26,7 +26,7 @@ export function ExpandableCards({ items, className }: ExpandableCardsProps) {
   const [active, setActive] = useState<ExpandableCardItem | null>(null);
   const id = useId();
   const ref = useRef<HTMLDivElement | null>(null);
-  const spring = { type: "spring", stiffness: 220, damping: 26 };
+  const spring = { type: "spring", stiffness: 220, damping: 26 } as const;
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
