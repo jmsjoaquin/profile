@@ -204,12 +204,12 @@ export default function Home() {
               </Badge>
               <div className="space-y-5">
                 <h1 className="text-4xl font-semibold leading-[1.05] text-[color:var(--ink)] sm:text-5xl lg:text-6xl">
-                  Calm, scalable systems with product-ready polish.
+                  Reliable backends with a clean, product-ready finish.
                 </h1>
                 <p className="max-w-xl text-lg text-muted-foreground">
-                  I help teams ship reliable backends, smooth integrations, and
-                  clean interfaces. Focused on Python, Java, PHP, and Next.js,
-                  with strong CSS, Tailwind CSS, and Material UI execution.
+                  I build scalable services and crisp interfaces. Core strengths
+                  in Python, Java, PHP, and Next.js, with confident CSS,
+                  Tailwind CSS, and Material UI delivery.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -253,50 +253,61 @@ export default function Home() {
               </div>
             </div>
 
-            <Card className="border-black/10 bg-white/80 shadow-lg backdrop-blur">
-              <CardHeader>
-                <CardTitle className="text-xl">Currently</CardTitle>
-                <CardDescription>
+            <Card className="relative overflow-hidden border-black/10 bg-white/80 shadow-lg backdrop-blur">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(14,116,144,0.12),transparent_55%)]" />
+              <CardHeader className="relative space-y-4">
+                <div className="flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
+                  <span className="h-2 w-2 rounded-full bg-[color:var(--brand)]" />
+                  Focus
+                  <span className="h-px flex-1 bg-black/10" />
+                </div>
+                <CardTitle className="text-xl">
                   Building systems that scale with confidence.
+                </CardTitle>
+                <CardDescription>
+                  Focused delivery with calm, predictable milestones.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-                    Availability
-                  </p>
-                  <div className="flex items-center justify-between rounded-2xl border border-black/10 bg-white/80 px-4 py-3">
-                    <div>
-                      <p className="text-sm font-medium text-[color:var(--ink)]">
-                        New client slots open
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        Booking for next month
-                      </p>
-                    </div>
-                    <Badge className="bg-[color:var(--brand)] text-white">
-                      Open
-                    </Badge>
-                  </div>
-                </div>
-                <Separator />
-                <div className="space-y-3">
-                  <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              <CardContent className="relative space-y-6">
+                <div className="rounded-2xl border border-black/10 bg-white/80 p-4">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                     Focus areas
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">API design</Badge>
-                    <Badge variant="secondary">Scalable data</Badge>
-                    <Badge variant="secondary">Cloud deploys</Badge>
-                    <Badge variant="secondary">Dashboards</Badge>
+                  <div className="mt-3 grid gap-2">
+                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
+                      <span className="text-sm text-[color:var(--ink)]">
+                        API design
+                      </span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
+                      <span className="text-sm text-[color:var(--ink)]">
+                        Scalable data
+                      </span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-2)]" />
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
+                      <span className="text-sm text-[color:var(--ink)]">
+                        Cloud deploys
+                      </span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl border border-black/5 bg-white/80 px-3 py-2">
+                      <span className="text-sm text-[color:var(--ink)]">
+                        Dashboards
+                      </span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-2)]" />
+                    </div>
                   </div>
                 </div>
+
                 <Separator />
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <p className="font-medium text-[color:var(--ink)]">
+
+                <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-sm text-muted-foreground">
+                  <span className="font-medium text-[color:var(--ink)]">
                     Based in GMT+3
-                  </p>
-                  <p>Working async with global teams.</p>
+                  </span>
+                  <span>Working async with global teams.</span>
                 </div>
               </CardContent>
             </Card>
@@ -308,11 +319,11 @@ export default function Home() {
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
               Services
             </p>
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <h2 className="max-w-xl text-3xl font-semibold text-[color:var(--ink)] sm:text-4xl">
+            <div className="flex flex-col gap-3">
+              <h2 className="max-w-2xl text-3xl font-semibold text-[color:var(--ink)] sm:text-4xl">
                 Backend strength with full stack range.
               </h2>
-              <p className="max-w-md text-muted-foreground">
+              <p className="max-w-2xl text-muted-foreground">
                 I partner with teams who want robust infrastructure and
                 thoughtful UX delivered with clarity.
               </p>
@@ -353,9 +364,13 @@ export default function Home() {
                 Systems that stay reliable as teams grow.
               </h2>
             </div>
-            <Badge variant="outline" className="hidden md:inline-flex">
-              Case studies on request
-            </Badge>
+            {/* <Badge
+              variant="outline"
+              className="hidden items-center gap-2 border-black/10 bg-white/70 text-[10px] uppercase tracking-[0.3em] text-muted-foreground shadow-sm backdrop-blur md:inline-flex"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand)]" />
+              Case studies by request
+            </Badge> */}
           </div>
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {projects.map((project) => (

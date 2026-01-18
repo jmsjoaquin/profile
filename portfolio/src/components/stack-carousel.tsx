@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -30,6 +30,16 @@ export function StackCarousel({
   const pauseTimerRef = useRef<number | null>(null);
   const loopItems = useMemo(() => [...items, ...items], [items]);
 
+  const pauseAutoScroll = useCallback((duration = 1200) => {
+    pausedRef.current = true;
+    if (pauseTimerRef.current) {
+      window.clearTimeout(pauseTimerRef.current);
+    }
+    pauseTimerRef.current = window.setTimeout(() => {
+      pausedRef.current = false;
+    }, duration);
+  }, []);
+
   useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller || items.length === 0) return;
@@ -41,7 +51,7 @@ export function StackCarousel({
     let lastTime = performance.now();
 
     const tick = (time: number) => {
-      const delta = time - lastTime;
+      const delta = Math.min(32, time - lastTime);
       lastTime = time;
 
       if (!pausedRef.current) {
@@ -59,15 +69,11 @@ export function StackCarousel({
     return () => cancelAnimationFrame(rafId);
   }, [items.length, speed]);
 
-  const pauseAutoScroll = (duration = 1200) => {
-    pausedRef.current = true;
-    if (pauseTimerRef.current) {
-      window.clearTimeout(pauseTimerRef.current);
-    }
-    pauseTimerRef.current = window.setTimeout(() => {
-      pausedRef.current = false;
-    }, duration);
-  };
+  useEffect(() => {
+    const handlePageScroll = () => pauseAutoScroll(300);
+    window.addEventListener("scroll", handlePageScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handlePageScroll);
+  }, [pauseAutoScroll]);
 
   const handleStep = (direction: "prev" | "next") => {
     const scroller = scrollerRef.current;
@@ -151,6 +157,7 @@ export function StackCarousel({
         ref={scrollerRef}
         className="stack-scroll logo-marquee"
         tabIndex={0}
+        onWheel={() => pauseAutoScroll(600)}
         onMouseEnter={() => {
           pausedRef.current = true;
         }}
