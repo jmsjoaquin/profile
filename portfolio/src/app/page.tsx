@@ -23,6 +23,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { ExpandableCards } from "@/components/ui/expandable-cards";
 import { NoiseBackground } from "@/components/ui/noise-background";
+import { ContactForm } from "@/components/contact-form";
 
 const services = [
   {
@@ -277,14 +278,15 @@ export default function Home() {
         }
         rightSlot={
           <div className="flex items-center gap-2 pr-1">
-            <ThemeToggle />
             <Button
               asChild
               size="sm"
-              className="rounded-full border border-border/70 bg-white/10 px-4 text-xs uppercase tracking-[0.3em] text-foreground hover:bg-white/20"
+              variant="ghost"
+              className="rounded-full border border-transparent px-4 text-xs uppercase tracking-[0.3em]"
             >
-              <a href="#contact">Book a call</a>
+              <a href="">Resume</a>
             </Button>
+            <ThemeToggle />
           </div>
         }
       />
@@ -552,7 +554,7 @@ export default function Home() {
         >
           <Card className="relative overflow-hidden border-border/60 bg-card/70">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.2),transparent_60%)]" />
-            <CardContent className="relative flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between">
+            <CardContent className="relative grid gap-8 p-8 md:grid-cols-[1.1fr_0.9fr]">
               <div className="space-y-3">
                 <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
                   Let us build
@@ -564,22 +566,15 @@ export default function Home() {
                   Share your roadmap, and I will propose an approach with clear
                   milestones, risks, and delivery plan.
                 </p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <NoiseBackground {...noiseButtonProps}>
-                  <a href="mailto:hello@yourdomain.com" className={noiseButtonClass}>
-                    Email me &rarr;
+                <p className="text-sm text-muted-foreground">
+                  Prefer email? Reach me at{" "}
+                  <a className="text-foreground" href="mailto:hello@yourdomain.com">
+                    hello@yourdomain.com
                   </a>
-                </NoiseBackground>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="rounded-full"
-                >
-                  <a href="#services">See services</a>
-                </Button>
+                  .
+                </p>
               </div>
+              <ContactForm />
             </CardContent>
           </Card>
         </section>
